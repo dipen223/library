@@ -25,12 +25,6 @@ function addBookToLibrary(title, author, pages, read) {
 
 function displayBook() {
   addBookToLibrary(title, author, noOfPages, review);
-  `<div>
-    <h2>Title: ${title}</h2>
-    <p>Author: ${author}</p>
-    <p>No of Pages: ${noOfPages}</p>
-    <p>Review: ${review}</p>
-  </div>`;
   booksContainer.innerHTML += `<div>
     <h2>Title: ${title}</h2>
     <p>Author: ${author}</p>
