@@ -1,44 +1,46 @@
 const myLibrary = [];
-const author = document.getElementById("author").value;
-const title = document.getElementById("title").value;
-const noOfPages = document.getElementById("pages").value;
-const review = document.getElementById("review").value;
+const author = document.getElementById("author")
+const title = document.getElementById("title")
+const noOfPages = document.getElementById("pages")
+const review = document.getElementById("review");
 const addBtn = document.getElementById("addBtn");
 const enterBtn = document.getElementById("enterBtn");
 const booksContainer = document.getElementById("booksContainer");
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, review) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = read;
-  this.info = function () {
-    return `The ${this.title} by ${this.author}, ${pages} pages, ${this.read}`;
-  };
-  let id = crypto.randomUUID();
+  this.review = review;
+  this.id = crypto.randomUUID();
 }
 
-function addBookToLibrary(title, author, pages, read) {
-  let book = new Book(title, author, pages, read);
+function addBookToLibrary(title, author, pages, review) {
+  let book = new Book(title, author, pages, review);
   myLibrary.push(book);
 }
 
 function displayBook() {
-  addBookToLibrary(title, author, noOfPages, review);
-  booksContainer.innerHTML += `<div>
-    <h2>Title: ${title}</h2>
-    <p>Author: ${author}</p>
-    <p>No of Pages: ${noOfPages}</p>
-    <p>Review: ${review}</p>
-  </div>`;
+  addBookToLibrary(title.value, author.value, noOfPages.value, review.value);
+  for(let book of myLibrary){
+    booksContainer.innerHTML += `
+    <div class="book" id="${book.id}">
+      <h2>${book.title}</h2>
+      <p>Author: ${book.author}</p>
+      <p>Pages: ${book.pages}</p>
+      <p>Review: ${book.review}</p>
+      <button class="deleteBtn">Delete</button>
+    </div>`;
+  }
 }
+
 
 const dialog = document.querySelector("dialog");
 enterBtn.addEventListener("click", () => {
   dialog.showModal();
 });
 
-addBtn.addEventListener("click", displayBook);
-addBtn.addEventListener("click", () => {
+addBtn.addEventListener("click",() =>{
+  displayBook();
   dialog.close();
-});
+})
