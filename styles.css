@@ -103,3 +103,9 @@ button{
     opacity:0.8;
 
 }
+
+.description{
+    font-size:1.2rem;
+    width:70%;
+    max-width:600px;
+}

@@ -26,9 +26,9 @@ function displayBook() {
     booksContainer.innerHTML += `
     <div class="book" id=${book.id}>
     <h3>Title: ${book.title}</h3>
-    <p>Author: ${book.author}</p>
-    <p>Pages: ${book.pages}</p>
-    <p>Review: ${book.review}</p>
+    <p class="author"><span>Author:</span>${book.author}</p>
+    <p class="pages"><span>Pages:</span>${book.pages}</p>
+    <p class="review"><span>Review:</span>${book.review}</p>
     <button class="delete-btn" data-id="${book.id}">Delete</button>
     </div> `;
   }
