@@ -4,23 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Project</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
      <h1>Welcome to My Library</h1>
   <dialog>
+    
     <form action="#" method="post">
       <div class="author">
-        <label for="author">Author:</label>
+        <label for="author">Author</label>
         <input type="text" id="author" name="author" placeholder="Jostien Gaarder">
       </div>
 
       <div class="title">
-        <label for="title">Title:</label>
+        <label for="title">Title</label>
         <input type="text" id="title" name="title" placeholder="Sophie's World">
       </div>
 
       <div class="pages">
-        <label for="pages">Pages:</label>
+        <label for="pages">Pages</label>
         <input type="number" id="pages" name="pages" placeholder="567" min=1>
       </div>
 
@@ -30,11 +32,13 @@
       </div>
 
       <button type="button">Add to Library</button>
+
     </form>
   </dialog>
-  <button type="button" id="enterBtn">Click here to enter a book in a library</button>
-  <button type="button" id="addBtn">Click here to see the list of books that are already in a library</button>
+  <button type="button" id="enterBtn">Enter Books</button>
+  <button type="button" id="addBtn">Check Library</button>
 
   <div id="booksContainer"></div>
+  <script src="script.js"></script>
 </body>
 </html>
