@@ -6,58 +6,70 @@ const review = document.getElementById("review");
 const addBtn = document.getElementById("addBtn");
 const showBtn = document.getElementById("showBtn");
 const booksContainer = document.getElementById("booksContainer");
+const dialog = document.querySelector("dialog");
+const enterBtn = document.getElementById("enterBtn");
 
-function Book(title, author, pages, review) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.review = review;
-  this.id = crypto.randomUUID();
-}
+class Book {
+  constructor() {
+    this.id = crypto.randomUUID();
+  }
 
-function addBookToLibrary() {
-  let book = new Book(title.value, author.value, pages.value, review.value);
-  myLibrary.push(book);
-}
+  addBookToLibrary() {
+    let book = {
+      title: title.value,
+      author: author.value,
+      pages: noOfPages.value,
+      review: review.value,
+      id: crypto.randomUUID()
+    };
+    myLibrary.push(book);
+  }
 
-function displayBook() {
-  booksContainer.innerHTML = "";
-  for (let book of myLibrary) {
-    booksContainer.innerHTML += `
-    <div class="book" id=${book.id}>
-    <h3>Title: ${book.title}</h3>
-    <p class="author"><span>Author:</span>${book.author}</p>
-    <p class="pages"><span>Pages:</span>${book.pages}</p>
-    <p class="review"><span>Review:</span>${book.review}</p>
-    <button class="delete-btn" data-id="${book.id}">Delete</button>
-    </div> `;
+  displayBook() {
+    booksContainer.innerHTML = "";
+    for (let book of myLibrary) {
+      booksContainer.innerHTML += `
+      <div class="book" id=${book.id}>
+        <h3>Title: ${book.title}</h3>
+        <p class="author"><span>Author:</span> ${book.author}</p>
+        <p class="pages"><span>Pages:</span> ${book.pages}</p>
+        <p class="review"><span>Review:</span> ${book.review}</p>
+        <button class="delete-btn" data-id="${book.id}">Delete</button>
+      </div>`;
+    }
+  }
+
+  deleteBook(event) {
+    const bookId = event.target.getAttribute("data-id");
+    const bookDiv = document.getElementById(bookId);
+    if (bookDiv) {
+      booksContainer.removeChild(bookDiv);
+      const index = myLibrary.findIndex(b => b.id === bookId);
+      if (index !== -1) {
+        myLibrary.splice(index, 1);
+      }
+    }
   }
 }
 
-const dialog = document.querySelector("dialog");
+const bookManager = new Book();
+
+
 enterBtn.addEventListener("click", () => {
   dialog.showModal();
 });
 
 addBtn.addEventListener("click", () => {
-  addBookToLibrary();
+  bookManager.addBookToLibrary(); 
 });
 
 showBtn.addEventListener("click", () => {
-  displayBook();
+  bookManager.displayBook();
   dialog.close();
 });
 
-function deleteBook(event) {
-  const bookId = event.target.getAttribute("data-id");
-  const bookDiv = document.getElementById(bookId);
-  if (bookDiv) {
-    booksContainer.removeChild(bookDiv);
-  }
-}
-
 booksContainer.addEventListener("click", (event) => {
   if (event.target.classList.contains("delete-btn")) {
-    deleteBook(event);
+    bookManager.deleteBook(event);
   }
 });
